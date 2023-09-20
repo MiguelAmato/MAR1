@@ -1,5 +1,5 @@
-// Nombre del alumno .....
-// Usuario del Juez ......
+// Nombre del alumno Miguel Antonio Amato Hermo
+// Usuario del Juez MAR102
 
 
 #include <iostream>
