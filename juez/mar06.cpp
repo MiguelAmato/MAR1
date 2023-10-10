@@ -6,14 +6,19 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <queue>
+#include <unordered_map>
 using namespace std;
 
 
+
 bool resuelveCaso() {
-    
-    if (true)
+    int n;
+	cin >> n;
+    if (n == 0)
         return false;
-    
+	unordered_map<int, int> users;
+	
     return true;
 }
 

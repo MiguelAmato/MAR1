@@ -6,14 +6,36 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
+#include <queue>
 using namespace std;
 
-
 bool resuelveCaso() {
-    
-    if (true)
+    int n = 0;
+	cin >> n;
+    if (n == 0)
         return false;
-    
+    unordered_map<int, queue<string>> map; // Mapa clave gravedad, valor pacientes que tengan esa gravedad
+	priority_queue<int, vector<int>, less<int>> pq; // Priority queue que almacena la gravedad de los pacientes
+	char accion;
+	for (int i = 0; i < n; ++i) {
+		cin >> accion;
+		if (accion == 'I') {
+			string nombre;
+			int gravedad;
+			cin >> nombre >> gravedad;
+			if (!map.count(gravedad))
+				pq.push(gravedad);
+			map[gravedad].push(nombre);
+		}
+		else if (accion == 'A') {
+			cout << map[pq.top()].front() << "\n";
+			map[pq.top()].pop();
+			if (map[pq.top()].empty())
+				pq.pop();
+		}
+	}
+	cout << "---\n";
     return true;
 }
 
