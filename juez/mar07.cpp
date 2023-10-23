@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <queue>
+#include "PriorityQueue.h"
 using namespace std;
 
 bool resuelveCaso() {
@@ -16,7 +17,7 @@ bool resuelveCaso() {
     if (n == 0)
         return false;
     unordered_map<int, queue<string>> map; // Mapa clave gravedad, valor pacientes que tengan esa gravedad
-	priority_queue<int, vector<int>, less<int>> pq; // Priority queue que almacena la gravedad de los pacientes
+	PriorityQueue<int, greater<int>> pq; // Priority queue que almacena la gravedad de los pacientes
 	char accion;
 	for (int i = 0; i < n; ++i) {
 		cin >> accion;

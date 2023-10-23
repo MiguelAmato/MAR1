@@ -6,6 +6,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include "PriorityQueue.h"
 #include <queue>
 using namespace std;
 
@@ -14,22 +15,24 @@ bool resuelveCaso() {
 	cin >> n;
     if (n == 0)
         return false;
-    priority_queue<int, vector<int>, greater<int>> pq;
+    PriorityQueue<long long int> pq;
 	int e;
 	for (int i = 0; i < n; ++i) {
 		cin >> e;
 		pq.push(e);
 	}
-	int total = 0, suma1 = 0, suma2 = 0;
+	long long int total = 0;
 	if (n > 1) {
+	long long int suma1 = pq.top(), suma2 = 0, res = 0;
+	pq.pop();
 		while (!pq.empty()) {
-			suma1 = pq.top();
-			pq.pop();
 			suma2 = pq.top();
 			pq.pop();
-			total += suma1 + suma2;
-			if (!pq.empty())
-				pq.push(suma1 + suma2);
+			res = suma1 + suma2;
+			total += res;
+			pq.push(res);
+			suma1 = pq.top();
+			pq.pop();
 		}
 	}
 	cout << total << "\n";
