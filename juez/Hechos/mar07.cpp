@@ -11,29 +11,42 @@
 #include "PriorityQueue.h"
 using namespace std;
 
+struct users {
+	string nombre;
+	int gravedad;
+	int tiempo;
+};
+
+bool operator >(const users& u1, const users& u2) {
+	if (u1.gravedad == u2.gravedad)
+		return u1.tiempo < u2.tiempo;
+	return u1.gravedad > u2.gravedad;
+}
+
 bool resuelveCaso() {
     int n = 0;
 	cin >> n;
     if (n == 0)
         return false;
-    unordered_map<int, queue<string>> map; // Mapa clave gravedad, valor pacientes que tengan esa gravedad
-	PriorityQueue<int, greater<int>> pq; // Priority queue que almacena la gravedad de los pacientes
+	PriorityQueue<users, greater<users>> pq;
 	char accion;
-	for (int i = 0; i < n; ++i) {
+	users paciente;
+	int orden = 0;
+	for (int i = 0; i < n;  ++i) {
 		cin >> accion;
-		if (accion == 'I') {
-			string nombre;
-			int gravedad;
-			cin >> nombre >> gravedad;
-			if (!map.count(gravedad))
-				pq.push(gravedad);
-			map[gravedad].push(nombre);
-		}
-		else if (accion == 'A') {
-			cout << map[pq.top()].front() << "\n";
-			map[pq.top()].pop();
-			if (map[pq.top()].empty())
-				pq.pop();
+		switch (accion)
+		{
+		case 'I':
+			cin >> paciente.nombre >> paciente.gravedad;
+			paciente.tiempo = orden++;
+			pq.push(paciente);
+			break;
+		case 'A':
+			cout << pq.top().nombre << "\n";
+			pq.pop();
+			break;
+		default:
+			break;
 		}
 	}
 	cout << "---\n";

@@ -25,7 +25,7 @@ bool hayConflicto(PriorityQueue<Tarea>& pq, const int& n) {
 	pq.pop();
 	if (t.per > 0)
 		pq.push({t.ini + t.per, t.fin + t.per, t.per});
-	while (t.ini < n && !pq.empty()) {
+	while (t.ini < n && pq.top().ini >= n && !pq.empty()) {
 		if (t.fin <= pq.top().ini) {
 			t = pq.top();
 			pq.pop();
